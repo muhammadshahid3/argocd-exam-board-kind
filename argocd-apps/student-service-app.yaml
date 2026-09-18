@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/muhammadshahid3/argocd-exam-board-kind
     targetRevision: main
-    path: student-service
+    path: student-service/helm-chart
   destination:
     server: https://kubernetes.default.svc
     namespace: exam-board
