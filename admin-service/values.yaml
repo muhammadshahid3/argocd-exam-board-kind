@@ -4,7 +4,7 @@ argocd:
   enabled: true
 
 name: admin-service
-replicas: 1
+replicas: 4
 
 image:
   repository: shahiddevops1/exam-result-system-admin_service
