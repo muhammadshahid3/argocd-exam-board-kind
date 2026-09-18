@@ -13,6 +13,12 @@
 
 ---
 
+![Student Pannel](./images/student.png)
+
+
+![Admin Site](./images/admin.png)
+
+
 ## ArgoCD Installation Commands (Quick Reference)
 
 The commands below were used to install ArgoCD on the cluster, verify the installation, and gain access to it. The purpose of each command is explained underneath it.
