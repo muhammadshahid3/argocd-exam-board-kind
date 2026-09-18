@@ -9,9 +9,9 @@ spec:
   project: default
   source:
     # TODO: apna git repo URL yahan daalo
-    repoURL: https://github.com/<your-org>/<your-repo>.git
+    repoURL: https://github.com/muhammadshahid3/argocd-exam-board-kind
     targetRevision: main
-    path: charts/namespace
+    path: namespace
   destination:
     server: https://kubernetes.default.svc
     namespace: exam-board

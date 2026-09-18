@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<your-org>/<your-repo>.git
+    repoURL: https://github.com/muhammadshahid3/argocd-exam-board-kind
     targetRevision: main
-    path: charts/ingress
+    path: ingress
   destination:
     server: https://kubernetes.default.svc
     namespace: exam-board

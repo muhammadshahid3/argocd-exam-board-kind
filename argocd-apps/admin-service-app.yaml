@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/<your-org>/<your-repo>.git
+    repoURL: https://github.com/muhammadshahid3/argocd-exam-board-kind
     targetRevision: main
-    path: charts/admin-service
+    path: admin-service
     # helm:
     #   values: |
     #     image:
