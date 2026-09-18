@@ -12,9 +12,11 @@
 9. [Overall Flow Summary](#9-overall-flow-summary)
 
 ---
+*Screenshot 1: Output of ` — Student Pannel" state.*
 
 ![Student Pannel](./images/student.png)
 
+*Screenshot 1: Output of ` — Admin  Pannel" state.*
 
 ![Admin Site](./images/admin.png)
 
