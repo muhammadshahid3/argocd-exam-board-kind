@@ -1,4 +1,4 @@
-# Exam Result System — Project Documentation
+# Exam Result Microservice System — Project Documentation
 
 ## Table of Contents
 1. [Project Overview](#1-project-overview)
