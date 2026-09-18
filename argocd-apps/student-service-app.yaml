@@ -5,16 +5,14 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
+    argocd-image-updater.argoproj.io/image-list: student=shahiddevops1/exam-result-system-student_service
+    argocd-image-updater.argoproj.io/student.update-strategy: latest
 spec:
   project: default
   source:
     repoURL: https://github.com/muhammadshahid3/argocd-exam-board-kind
     targetRevision: main
     path: student-service
-    # helm:
-    #   values: |
-    #     image:
-    #       tag: v1.2.0
   destination:
     server: https://kubernetes.default.svc
     namespace: exam-board
