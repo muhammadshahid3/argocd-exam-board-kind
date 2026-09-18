@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block page_title %}Final Result{% endblock %}
+{% block content %}
+<div class="panel form-panel">
+  <h5><i class="fa-solid fa-certificate"></i> Final Result Verification</h5>
+  <p class="text-muted">Enter any student's roll number to preview their complete, computed result exactly as it will appear on the public student portal.</p>
+  <form method="get" class="roll-lookup-form">
+    <div class="mb-3">
+      <label class="form-label">{{ form.roll_number.label }}</label>
+      {{ form.roll_number }}
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg"><i class="fa-solid fa-search"></i> View Result</button>
+  </form>
+</div>
+
+{% if not_found %}
+<div class="panel form-panel">
+  <div class="no-result-box">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <h5>No result found for this roll number.</h5>
+    <p>Please check the roll number and try again.</p>
+  </div>
+</div>
+{% endif %}
+
+{% if result %}
+<div class="panel result-panel">
+  <div class="result-header">
+    <h4>{{ student.name }}</h4>
+    <span class="{% if result.is_pass %}status-pass{% else %}status-fail{% endif %}">
+      {% if result.is_pass %}PASS{% else %}FAIL{% endif %}
+    </span>
+  </div>
+  <div class="student-meta">
+    <div><span>Father Name</span><strong>{{ student.father_name }}</strong></div>
+    <div><span>Roll Number</span><strong>{{ student.roll_number }}</strong></div>
+    <div><span>Class</span><strong>{{ student.school_class.name }}</strong></div>
+    <div><span>Section</span><strong>{{ student.section.name }}</strong></div>
+    <div><span>Academic Year</span><strong>{{ result.academic_year }}</strong></div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table result-table align-middle">
+      <thead><tr><th>Subject</th><th>Total Marks</th><th>Obtained Marks</th></tr></thead>
+      <tbody>
+        {% for item in result.items.all %}
+        <tr>
+          <td>{{ item.subject.name }}</td>
+          <td>{{ item.subject.total_marks }}</td>
+          <td>{{ item.obtained_marks }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr class="fw-bold"><td>Total</td><td>{{ result.total_marks }}</td><td>{{ result.total_obtained_marks }}</td></tr>
+        <tr><td colspan="2">Percentage</td><td>{{ result.percentage }}%</td></tr>
+        <tr><td colspan="2">Grade</td><td><span class="grade-pill">{{ result.grade }}</span></td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

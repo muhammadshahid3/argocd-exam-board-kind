@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block page_title %}Subjects{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h5><i class="fa-solid fa-book"></i> All Subjects</h5>
+    <a href="{% url 'subject_create' %}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Subject</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead><tr><th>Subject</th><th>Class</th><th>Total Marks</th><th class="text-end">Actions</th></tr></thead>
+      <tbody>
+        {% for s in subjects %}
+        <tr>
+          <td>{{ s.name }}</td>
+          <td>{{ s.school_class.name }}</td>
+          <td>{{ s.total_marks }}</td>
+          <td class="text-end">
+            <a href="{% url 'subject_update' s.pk %}" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen"></i></a>
+            <a href="{% url 'subject_delete' s.pk %}" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" class="text-center text-muted py-4">No subjects found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block page_title %}Sections{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h5><i class="fa-solid fa-layer-group"></i> All Sections</h5>
+    <a href="{% url 'section_create' %}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create Section</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead><tr><th>Section</th><th>Class</th><th class="text-end">Actions</th></tr></thead>
+      <tbody>
+        {% for s in sections %}
+        <tr>
+          <td>{{ s.name }}</td>
+          <td>{{ s.school_class.name }}</td>
+          <td class="text-end">
+            <a href="{% url 'section_update' s.pk %}" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen"></i></a>
+            <a href="{% url 'section_delete' s.pk %}" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3" class="text-center text-muted py-4">No sections found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<header class="hero">
+  <div class="container text-center">
+    <h1>Examination Results 2026</h1>
+    <p class="hero-sub">Fast, secure and reliable access to your official examination results — instantly.</p>
+  </div>
+</header>
+
+<section id="result-search" class="search-section">
+  <div class="container">
+    <div class="search-card mx-auto">
+      <h2 class="text-center"><i class="fa-solid fa-magnifying-glass"></i> Check Your Result</h2>
+      <p class="text-center text-muted">Enter your roll number below to view your official examination result.</p>
+      <form method="get" class="roll-form" action="{% url 'home' %}#result-search">
+        <div class="input-group input-group-lg">
+          {{ form.roll_number }}
+          <button class="btn btn-check" type="submit"><i class="fa-solid fa-search"></i> Check Result</button>
+        </div>
+        {% if form.roll_number.errors %}
+          <div class="text-danger small mt-2">{{ form.roll_number.errors|striptags }}</div>
+        {% endif %}
+      </form>
+    </div>
+
+    {% if not_found %}
+    <div class="result-message error-message mx-auto">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <h4>No result found for this roll number.</h4>
+      <p>Please check your roll number and try again.</p>
+    </div>
+    {% endif %}
+
+    {% if result %}
+    <div class="result-card mx-auto">
+      <div class="result-card-header">
+        <div>
+          <h3>{{ student.name }}</h3>
+          <p class="text-muted mb-0">Father Name: {{ student.father_name }}</p>
+        </div>
+        <div class="status-badge {% if result.is_pass %}pass{% else %}fail{% endif %}">
+          {% if result.is_pass %}<i class="fa-solid fa-circle-check"></i> PASS{% else %}<i class="fa-solid fa-circle-xmark"></i> FAIL{% endif %}
+        </div>
+      </div>
+
+      <div class="result-meta">
+        <div><span>Roll Number</span><strong>{{ student.roll_number }}</strong></div>
+        <div><span>Class</span><strong>{{ student.school_class.name }}</strong></div>
+        <div><span>Section</span><strong>{{ student.section.name }}</strong></div>
+        <div><span>Academic Year</span><strong>{{ result.academic_year }}</strong></div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table result-table align-middle">
+          <thead>
+            <tr><th>Subject</th><th>Total Marks</th><th>Obtained Marks</th></tr>
+          </thead>
+          <tbody>
+            {% for item in result.items.all %}
+            <tr>
+              <td>{{ item.subject.name }}</td>
+              <td>{{ item.subject.total_marks }}</td>
+              <td>{{ item.obtained_marks }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr class="fw-bold">
+              <td>Total</td><td>{{ result.total_marks }}</td><td>{{ result.total_obtained_marks }}</td>
+            </tr>
+            <tr><td colspan="2">Percentage</td><td>{{ result.percentage }}%</td></tr>
+            <tr><td colspan="2">Grade</td><td><span class="grade-pill">{{ result.grade }}</span></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="feature-box">
+          <i class="fa-solid fa-bolt"></i>
+          <h5>Instant Results</h5>
+          <p>Get your examination result in seconds, with accurate grade calculation.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h5>Secure & Reliable</h5>
+          <p>Results are securely served straight from our verified examination database.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box">
+          <i class="fa-solid fa-mobile-screen"></i>
+          <h5>Mobile Friendly</h5>
+          <p>Check your result from any device — desktop, tablet, or mobile phone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block page_title %}Add Result{% endblock %}
+{% block content %}
+<div class="panel form-panel">
+  <h5><i class="fa-solid fa-square-plus"></i> Add Result — Step 2: Enter Marks</h5>
+
+  <div class="student-meta">
+    <div><span>Student</span><strong>{{ student.name }}</strong></div>
+    <div><span>Roll Number</span><strong>{{ student.roll_number }}</strong></div>
+    <div><span>Class</span><strong>{{ student.school_class.name }}</strong></div>
+    <div><span>Section</span><strong>{{ student.section.name }}</strong></div>
+  </div>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="table-responsive">
+      <table class="table align-middle marks-table">
+        <thead><tr><th>Subject</th><th>Total Marks</th><th>Obtained Marks</th></tr></thead>
+        <tbody>
+          {% for row in subject_rows %}
+          <tr>
+            <td>{{ row.subject.name }}</td>
+            <td>{{ row.subject.total_marks }}</td>
+            <td style="max-width:140px;">
+              <input type="number" min="0" max="{{ row.subject.total_marks }}" class="form-control {% if row.error %}is-invalid{% endif %}"
+                     name="subject_{{ row.subject.id }}" value="{{ row.value }}" required>
+              {% if row.error %}<div class="text-danger small mt-1">{{ row.error }}</div>{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Result</button>
+      <a href="{% url 'select_student' %}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

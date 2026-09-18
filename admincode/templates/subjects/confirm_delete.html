@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}Delete Subject{% endblock %}
+{% block content %}
+<div class="panel form-panel">
+  <h5 class="text-danger"><i class="fa-solid fa-triangle-exclamation"></i> Confirm Delete</h5>
+  <p>Are you sure you want to delete subject <strong>{{ subject.name }}</strong> ({{ subject.school_class.name }})?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+    <a href="{% url 'subject_list' %}" class="btn btn-outline-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

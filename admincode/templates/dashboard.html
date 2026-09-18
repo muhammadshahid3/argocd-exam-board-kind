@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block page_title %}Dashboard{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-sm-6 col-xl-3">
+    <div class="stat-card stat-blue">
+      <div class="stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
+      <div class="stat-value">{{ total_students }}</div>
+      <div class="stat-label">Total Students</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="stat-card stat-purple">
+      <div class="stat-icon"><i class="fa-solid fa-school"></i></div>
+      <div class="stat-value">{{ total_classes }}</div>
+      <div class="stat-label">Total Classes</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="stat-card stat-green">
+      <div class="stat-icon"><i class="fa-solid fa-book"></i></div>
+      <div class="stat-value">{{ total_subjects }}</div>
+      <div class="stat-label">Total Subjects</div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="stat-card stat-orange">
+      <div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <div class="stat-value">{{ total_results }}</div>
+      <div class="stat-label">Total Results</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mt-1">
+  <div class="col-12">
+    <div class="panel">
+      <h5><i class="fa-solid fa-bolt"></i> Quick Actions</h5>
+      <div class="quick-actions">
+        <a href="{% url 'student_create' %}" class="qa-btn"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+        <a href="{% url 'class_create' %}" class="qa-btn"><i class="fa-solid fa-school"></i> Create Class</a>
+        <a href="{% url 'section_create' %}" class="qa-btn"><i class="fa-solid fa-layer-group"></i> Create Section</a>
+        <a href="{% url 'subject_create' %}" class="qa-btn"><i class="fa-solid fa-book"></i> Add Subject</a>
+        <a href="{% url 'select_student' %}" class="qa-btn"><i class="fa-solid fa-square-plus"></i> Add Result</a>
+        <a href="{% url 'final_result' %}" class="qa-btn"><i class="fa-solid fa-certificate"></i> Final Result</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

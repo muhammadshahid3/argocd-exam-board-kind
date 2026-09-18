@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block page_title %}Classes{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="panel-header">
+    <h5><i class="fa-solid fa-school"></i> All Classes</h5>
+    <a href="{% url 'class_create' %}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create Class</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead><tr><th>Class Name</th><th>Sections</th><th>Subjects</th><th class="text-end">Actions</th></tr></thead>
+      <tbody>
+        {% for c in classes %}
+        <tr>
+          <td>{{ c.name }}</td>
+          <td>{{ c.sections.count }}</td>
+          <td>{{ c.subjects.count }}</td>
+          <td class="text-end">
+            <a href="{% url 'class_update' c.pk %}" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen"></i></a>
+            <a href="{% url 'class_delete' c.pk %}" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" class="text-center text-muted py-4">No classes found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

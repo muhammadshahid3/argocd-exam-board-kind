@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}Delete Student{% endblock %}
+{% block content %}
+<div class="panel form-panel">
+  <h5 class="text-danger"><i class="fa-solid fa-triangle-exclamation"></i> Confirm Delete</h5>
+  <p>Are you sure you want to delete <strong>{{ student.name }}</strong> (Roll No. {{ student.roll_number }})? This action cannot be undone.</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+    <a href="{% url 'student_list' %}" class="btn btn-outline-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
