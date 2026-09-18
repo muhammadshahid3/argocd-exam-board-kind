@@ -72,11 +72,14 @@ argocd login <instance_public_ip>:8080 --username admin --password <initial_pass
 
 > The items below are placeholders — replace them with the links/paths to your actual screenshots (for example, by creating an `images/` folder in your GitHub repository, uploading the screenshots there, and updating the links accordingly).
 
-![ArgoCD Pods Running](./images/argocd-pods-running.png)
+![ArgoCD Pods Running](./images/pods.png)
 *Screenshot 1: Output of `kubectl get pods -n argocd` — all ArgoCD pods in the "Running" state.*
 
-![ArgoCD Login / UI](./images/argocd-login-ui.png)
+![ArgoCD Dashboard / UI](./images/1st.png)
 *Screenshot 2: Successful ArgoCD CLI login, or the ArgoCD Web UI dashboard.*
+
+![ArgoCD Ui pod / UI](./images/uipod.png)
+*Screenshot 2: Successful ArgoCD CLI login, or the ArgoCD Web UI pod dashboard.*
 
 ---
 
