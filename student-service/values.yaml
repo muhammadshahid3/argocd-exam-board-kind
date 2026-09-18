@@ -1,0 +1,32 @@
+namespace: exam-board
+
+argocd:
+  enabled: true
+
+name: student-service
+replicas: 1
+
+image:
+  repository: shahiddevops1/exam-result-system-student_service
+  tag: latest
+  pullPolicy: Always
+
+port: 8000
+
+postgres:
+  host: postgres
+  port: 5432
+  secretName: postgres-secret
+
+env:
+  djangoSecretKey: "change-this-secret-key"
+  debug: "True"
+  adminPortalUrl: "http://admin-service:8001"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

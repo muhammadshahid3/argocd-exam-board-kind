@@ -1,0 +1,35 @@
+namespace: exam-board
+
+argocd:
+  enabled: true
+
+name: admin-service
+replicas: 1
+
+image:
+  repository: shahiddevops1/exam-result-system-admin_service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+port: 8001
+
+postgres:
+  host: postgres
+  port: 5432
+  secretName: postgres-secret
+
+env:
+  djangoSecretKey: "change-this-secret-key"
+  debug: "True"
+  studentPortalUrl: "http://student-service:8000"
+  defaultAdminUsername: "admin"
+  defaultAdminPassword: "Admin@12345"
+  defaultAdminEmail: "admin@example.com"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

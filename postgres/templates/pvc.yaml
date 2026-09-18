@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: {{ .Values.namespace }}
+  annotations:
+    {{- include "postgres.syncWave" (dict "root" $ "wave" "2") | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.storage.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.size }}

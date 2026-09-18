@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: admin-service
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<your-org>/<your-repo>.git
+    targetRevision: main
+    path: charts/admin-service
+    # helm:
+    #   values: |
+    #     image:
+    #       tag: v1.2.0
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: exam-board
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

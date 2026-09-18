@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<your-org>/<your-repo>.git
+    targetRevision: main
+    path: charts/postgres
+    # helm:
+    #   values: |
+    #     auth:
+    #       password: super-secret-prod-password
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: exam-board
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

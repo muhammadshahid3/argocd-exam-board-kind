@@ -1,0 +1,39 @@
+namespace: exam-board
+
+argocd:
+  enabled: true
+
+image: postgres:16
+port: 5432
+
+auth:
+  database: exam_results
+  username: postgres
+  password: postgres
+
+storage:
+  size: 5Gi
+  storageClassName: manual
+  pv:
+    create: true
+    hostPath: /data/postgres
+    reclaimPolicy: Retain
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+probes:
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 5
+  failureThreshold: 6
+  liveness:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6

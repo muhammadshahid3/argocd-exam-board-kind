@@ -1,0 +1,17 @@
+{{- if .Values.storage.pv.create }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv
+  annotations:
+    {{- include "postgres.syncWave" (dict "root" $ "wave" "1") | nindent 4 }}
+spec:
+  capacity:
+    storage: {{ .Values.storage.size }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: {{ .Values.storage.pv.reclaimPolicy }}
+  storageClassName: {{ .Values.storage.storageClassName }}
+  hostPath:
+    path: {{ .Values.storage.pv.hostPath }}
+{{- end }}

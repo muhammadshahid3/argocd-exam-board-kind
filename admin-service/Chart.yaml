@@ -1,0 +1,6 @@
+apiVersion: v2
+name: admin-service
+description: Admin microservice for the Exam Result System
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

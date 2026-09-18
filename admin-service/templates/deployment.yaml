@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    {{- include "admin-service.syncWave" (dict "root" $ "wave" "4") | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.port }}
+              protocol: TCP
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.secretName }}
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.secretName }}
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.secretName }}
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgres.host | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgres.port | quote }}
+            - name: DJANGO_SECRET_KEY
+              value: {{ .Values.env.djangoSecretKey | quote }}
+            - name: DEBUG
+              value: {{ .Values.env.debug | quote }}
+            - name: STUDENT_PORTAL_URL
+              value: {{ .Values.env.studentPortalUrl | quote }}
+            - name: DEFAULT_ADMIN_USERNAME
+              value: {{ .Values.env.defaultAdminUsername | quote }}
+            - name: DEFAULT_ADMIN_PASSWORD
+              value: {{ .Values.env.defaultAdminPassword | quote }}
+            - name: DEFAULT_ADMIN_EMAIL
+              value: {{ .Values.env.defaultAdminEmail | quote }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
